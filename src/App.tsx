@@ -1,14 +1,14 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
-import "./App.css";
+import { ThemeProvider } from "@material-ui/core";
+import theme from "./ui/theme";
+import Header from "./ui/header";
 
 function App() {
   return (
-    <div className="App">
-      <Button variant="contained" color="primary">
-        Hello World
-      </Button>
-    </div>
+    <ThemeProvider theme={theme}>
+      <Header />
+      hello!
+    </ThemeProvider>
   );
 }
 
