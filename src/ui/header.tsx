@@ -82,17 +82,53 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: "50px",
     height: "45px",
   },
+  menu: {
+    backgroundColor: theme.palette.primary.main,
+    color: "white",
+    borderRadius: "0px",
+  },
+  menuItem: {
+    ...theme.typography.tab,
+    opacity: 0.7,
+    "&:hover": {
+      opacity: 1,
+    },
+  },
+  menuItemSelected: {
+    backgroundColor: theme.palette.secondary.main,
+    opacity: 1,
+  },
 }));
 
-const routes = ["/", "/services", "/revolution", "/about", "/contact"];
+const routesWithIndex = [
+  { path: "/", index: 0 },
+  { path: "/services", index: 1 },
+  { path: "/services", index: 1 },
+  { path: "/customSoftware", index: 1 },
+  { path: "/mobileApps", index: 1 },
+  { path: "/websites", index: 1 },
+  { path: "/revolution", index: 2 },
+  { path: "/about", index: 3 },
+  { path: "/contact", index: 4 },
+];
+
+const getRouteIndex = (path: string) => {
+  const route = routesWithIndex.find((route) => route.path === path);
+  return route?.index;
+};
+
+const menuOptions = [
+  { name: "Services", path: "/services" },
+  { name: "Custom Software Development", path: "/customSoftware" },
+  { name: "Mobile App development", path: "/mobileApps" },
+  { name: "Website Development", path: "/websites" },
+];
 
 const Header: FC<{}> = () => {
   const classes = useStyles();
-
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
-
   const [selectedTabIndex, setTabIndex] = useState(
-    routes.findIndex((path) => path === window.location.pathname)
+    getRouteIndex(window.location.pathname)
   );
 
   const handleTabChange = (e: React.ChangeEvent<{}>, value: number) => {
@@ -134,7 +170,7 @@ const Header: FC<{}> = () => {
               />
 
               <LinkTab
-                aria-controls="simple-menu"
+                aria-owns="simple-menu"
                 aria-haspopup="true"
                 className={classes.tab}
                 label="Services"
@@ -167,48 +203,28 @@ const Header: FC<{}> = () => {
               keepMounted
               open={Boolean(anchorEl)}
               onClose={handleClose}
+              classes={{ paper: classes.menu }}
+              elevation={0}
               MenuListProps={{ onMouseLeave: handleClose }}
             >
-              <LinkMenuItem
-                onClick={() => {
-                  handleClose();
-                  setTabIndex(1);
-                }}
-                component={Link}
-                to="/services"
-              >
-                Services
-              </LinkMenuItem>
-              <LinkMenuItem
-                onClick={() => {
-                  handleClose();
-                  setTabIndex(1);
-                }}
-                component={Link}
-                to="/customServices"
-              >
-                Custom Services
-              </LinkMenuItem>
-              <LinkMenuItem
-                onClick={() => {
-                  handleClose();
-                  setTabIndex(1);
-                }}
-                component={Link}
-                to="/mobileApps"
-              >
-                Mobile Apps
-              </LinkMenuItem>
-              <LinkMenuItem
-                onClick={() => {
-                  handleClose();
-                  setTabIndex(1);
-                }}
-                component={Link}
-                to="/websites"
-              >
-                Websites
-              </LinkMenuItem>
+              {menuOptions.map((menuOption, index) => (
+                <LinkMenuItem
+                  key={index}
+                  component={Link}
+                  to={menuOption.path}
+                  classes={{
+                    root: classes.menuItem,
+                    selected: classes.menuItemSelected,
+                  }}
+                  selected={menuOption.path === window.location.pathname}
+                  onClick={() => {
+                    handleClose();
+                    setTabIndex(1);
+                  }}
+                >
+                  {menuOption.name}
+                </LinkMenuItem>
+              ))}
             </Menu>
             <LinkButton
               variant="contained"
