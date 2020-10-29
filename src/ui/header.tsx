@@ -1,5 +1,5 @@
-import React, { FC, useState } from "react";
-import { Link, LinkProps } from "react-router-dom";
+import React, { FC, useMemo, useState } from "react";
+import { Link, LinkProps, useLocation } from "react-router-dom";
 import {
   AppBar,
   makeStyles,
@@ -163,19 +163,24 @@ const routes = [
 
 const menuOptions = [
   { name: "Services", path: "/services", index: 1 },
-  { name: "Custom Software Development", path: "/customSoftware", index: 1 },
-  { name: "Mobile App development", path: "/mobileApps", index: 1 },
-  { name: "Website Development", path: "/websites", index: 1 },
+  {
+    name: "Custom Software Development",
+    path: "/services/customSoftware",
+    index: 1,
+  },
+  { name: "Mobile App development", path: "/services/mobileApps", index: 1 },
+  { name: "Website Development", path: "/services/websites", index: 1 },
 ];
 
 const getRouteIndex = (path: string) => {
   const route = [...routes, ...menuOptions].find(
-    (route) => route.path === path
+    (route) => path.toLowerCase() === route.path.toLowerCase()
   );
   return route?.index;
 };
 
 const Header: FC<{}> = () => {
+  const location = useLocation();
   const classes = useStyles();
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.down("md"));
@@ -186,13 +191,9 @@ const Header: FC<{}> = () => {
   const [anchorEl, setAnchorEl] = React.useState<null | HTMLElement>(null);
   const [openMenu, setOpenMenu] = React.useState(false);
 
-  const [selectedTabIndex, setTabIndex] = useState(
-    getRouteIndex(window.location.pathname)
-  );
-
-  const handleTabChange = (e: React.ChangeEvent<{}>, value: number) => {
-    setTabIndex(value);
-  };
+  const selectedTabIndex = useMemo(() => getRouteIndex(location.pathname), [
+    location,
+  ]);
 
   const handleClick = (event: any) => {
     setAnchorEl(event.currentTarget);
@@ -204,12 +205,19 @@ const Header: FC<{}> = () => {
     setOpenMenu(false);
   };
 
+  const isSelectedRoute = (path: string) => {
+    if (path === "/") {
+      return location.pathname === path;
+    } else {
+      return location.pathname.toLowerCase().includes(path.toLowerCase());
+    }
+  };
+
   const tabs = (
     <Tabs
       value={selectedTabIndex}
       indicatorColor="primary"
       className={classes.tabContainer}
-      onChange={handleTabChange}
     >
       {routes.map((route) =>
         !route.haveSubMenu ? (
@@ -265,14 +273,8 @@ const Header: FC<{}> = () => {
               divider
               component={Link}
               to={route.path}
-              selected={
-                route.path === window.location.pathname ||
-                getRouteIndex(route.path) === selectedTabIndex
-              }
-              onClick={() => {
-                setOpenDrawer(false);
-                setTabIndex(route.index);
-              }}
+              selected={isSelectedRoute(route.path)}
+              onClick={() => setOpenDrawer(false)}
               classes={{ selected: classes.selectedDrawerItem }}
               className={classes.drawerItem}
             >
@@ -284,11 +286,10 @@ const Header: FC<{}> = () => {
             button
             component={Link}
             to="/estimate"
-            selected={"/estimate" === window.location.pathname}
-            onClick={() => {
-              setOpenDrawer(false);
-              setTabIndex(5);
-            }}
+            selected={location.pathname
+              .toLowerCase()
+              .includes("/estimate".toLowerCase())}
+            onClick={() => setOpenDrawer(false)}
             className={classes.drawerItemEstimate}
             classes={{ selected: classes.selectedDrawerItem }}
           >
@@ -316,7 +317,6 @@ const Header: FC<{}> = () => {
               to="/"
               disableRipple
               className={classes.logoContainer}
-              onClick={() => setTabIndex(0)}
             >
               <img src={logo} alt="Company logo" className={classes.logo} />
             </LinkButton>
@@ -340,11 +340,8 @@ const Header: FC<{}> = () => {
                   classes={{
                     root: classes.menuItem,
                   }}
-                  selected={menuOption.path === window.location.pathname}
-                  onClick={() => {
-                    setTabIndex(1);
-                    handleClose();
-                  }}
+                  selected={isSelectedRoute(menuOption.path)}
+                  onClick={handleClose}
                 >
                   {menuOption.name}
                 </LinkMenuItem>
