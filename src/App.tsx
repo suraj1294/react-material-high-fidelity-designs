@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import theme from "./ui/theme";
 import Header from "./ui/header";
 import Footer from "./ui/footer";
+import LandingPage from "./screens/LandingPage";
 
 function App() {
   return (
@@ -11,11 +12,7 @@ function App() {
       <Router>
         <Header />
         <Switch>
-          <Route
-            exact
-            path="/"
-            component={() => <div style={{ height: "1000px" }}>Home</div>}
-          />
+          <Route exact path="/" component={() => <LandingPage />} />
           <Route exact path="/services" component={() => <div>Services</div>} />
           <Route
             exact
