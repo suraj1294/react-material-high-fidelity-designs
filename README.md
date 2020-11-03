@@ -54,3 +54,7 @@ yarn add @material-ui/icons
 ## Material Styles
 yarn add @material-ui/styles
 
+## React Lottie
+npm install --save react-lottie
+npm install --save @types/react-lottie
+
