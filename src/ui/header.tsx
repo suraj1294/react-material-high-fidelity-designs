@@ -103,6 +103,9 @@ const useStyles = makeStyles((theme) => ({
     marginRight: "24px",
     marginLeft: "50px",
     height: "45px",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
   },
   menu: {
     backgroundColor: theme.palette.primary.main,
@@ -168,7 +171,11 @@ const menuOptions = [
     path: "/services/customSoftware",
     index: 1,
   },
-  { name: "Mobile App development", path: "/services/mobileApps", index: 1 },
+  {
+    name: "iOS/Android App development",
+    path: "/services/mobileApps",
+    index: 1,
+  },
   { name: "Website Development", path: "/services/websites", index: 1 },
 ];
 
