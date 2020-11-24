@@ -41,9 +41,6 @@ declare module "@material-ui/core/styles/createTypography" {
 }
 
 export default createMuiTheme({
-  // status: {
-  //     danger: '#e53e3e',
-  //   },
   palette: {
     primary: { main: `${arcBlue}` },
     secondary: { main: `${arcOrange}` },
