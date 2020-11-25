@@ -32,11 +32,13 @@ declare module "@material-ui/core/styles/createTypography" {
     tab: Typography["h1"];
     estimate: Typography["h1"];
     heroButton: Typography["button"];
+    infoButton: Typography["button"];
   }
   interface TypographyOptions {
     tab: TypographyOptions["h1"];
     estimate: TypographyOptions["h1"];
     heroButton: Typography["button"];
+    infoButton: Typography["button"];
   }
 }
 
@@ -83,9 +85,23 @@ export default createMuiTheme({
       fontWeight: 300,
       color: arcGrey,
     },
+    subtitle2: {
+      fontSize: "1rem",
+      fontWeight: 300,
+      color: "white",
+    },
     heroButton: {
       borderColor: arcBlue,
       color: arcBlue,
+      borderWidth: 2,
+      textTransform: "none",
+      borderRadius: 50,
+      fontFamily: "Roboto",
+      fontWeight: "bold",
+    },
+    infoButton: {
+      borderColor: "white",
+      color: "white",
       borderWidth: 2,
       textTransform: "none",
       borderRadius: 50,
