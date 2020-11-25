@@ -5,11 +5,14 @@ import useMediaQuery from "@material-ui/core/useMediaQuery";
 import Grid from "@material-ui/core/Grid";
 import animationData from "../animations/landinganimation/data";
 import Button from "@material-ui/core/Button";
+import Card from "@material-ui/core/Card";
+import CardContent from "@material-ui/core/CardContent";
 import Typography from "@material-ui/core/Typography";
 import ButtonArrow from "../ui/ButtonArrow";
 import customSoftwareIcon from "../assets/Custom Software Icon.svg";
 import mobileAppsIcon from "../assets/mobileIcon.svg";
 import websiteIcon from "../assets/websiteIcon.svg";
+import revolutionBackGround from "../assets/repeatingBackground.svg";
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -84,6 +87,31 @@ const useStyles = makeStyles((theme) => ({
     [theme.breakpoints.down("xs")]: {
       marginTop: "5em",
     },
+  },
+  revolutionBackGround: {
+    backgroundImage: `url(${revolutionBackGround})`,
+    backgroundPosition: "center",
+    backgroundSize: "cover",
+    backgroundRepeat: "no-repeat",
+    height: "100%",
+    width: "100%",
+  },
+  revolutionCard: {
+    position: "absolute",
+    boxShadow: theme.shadows[10],
+    borderRadius: 10,
+    padding: "10em",
+    [theme.breakpoints.down("sm")]: {
+      padding: 0,
+      paddingTop: "8em",
+      paddingBottom: "8em",
+      boxShadow: theme.shadows[5],
+      borderRadius: 0,
+      width: "100%",
+    },
+  },
+  revolutionContainer: {
+    marginTop: "12em",
   },
 }));
 
@@ -264,6 +292,50 @@ const LandingPage = () => {
             <Grid item className={classes.icon}>
               <img src={websiteIcon} alt="websites icon" />
             </Grid>
+          </Grid>
+        </Grid>
+
+        {/*-----revolution development block-----*/}
+        <Grid item className={classes.revolutionContainer}>
+          <Grid
+            alignItems="center"
+            justify="center"
+            container
+            style={{ height: "100em" }}
+          >
+            <Card className={classes.revolutionCard}>
+              <CardContent>
+                <Grid
+                  container
+                  direction="column"
+                  style={{ textAlign: "center" }}
+                >
+                  <Grid item>
+                    <Typography variant="h3" gutterBottom>
+                      The Revolution
+                    </Typography>
+                  </Grid>
+                  <Grid item>
+                    <Typography variant="subtitle1">
+                      Visionary insights coupled with cutting-edge technology is
+                      a recipe for revolution.
+                    </Typography>
+                    <Button
+                      variant="outlined"
+                      className={classes.buttonLearnMoreHero}
+                    >
+                      <span style={{ marginRight: 10 }}>Learn more</span>
+                      <ButtonArrow
+                        width={15}
+                        height={15}
+                        fill={theme.palette.primary.main}
+                      />
+                    </Button>
+                  </Grid>
+                </Grid>
+              </CardContent>
+            </Card>
+            <div className={classes.revolutionBackGround} />
           </Grid>
         </Grid>
       </Grid>
