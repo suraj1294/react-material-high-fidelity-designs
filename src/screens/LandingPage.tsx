@@ -15,6 +15,8 @@ import websiteIcon from "../assets/websiteIcon.svg";
 import revolutionBackGround from "../assets/repeatingBackground.svg";
 import infoBackground from "../assets/infoBackground.svg";
 import CallToAction from "../ui/CallToAction";
+import { Link } from "react-router-dom";
+import { LinkButton } from "../ui/header";
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -216,9 +218,11 @@ const LandingPage = () => {
                 Complete Digital Solution. From investigation to{" "}
                 <span className={classes.specialText}>celebration</span>
               </Typography>
-              <Button
+              <LinkButton
                 variant="outlined"
                 className={classes.serviceLearnMoreButton}
+                component={Link}
+                to="/services/customSoftware"
               >
                 <span style={{ marginRight: 10 }}>Learn More</span>
                 <ButtonArrow
@@ -226,7 +230,7 @@ const LandingPage = () => {
                   height={10}
                   fill={theme.palette.primary.main}
                 />
-              </Button>
+              </LinkButton>
             </Grid>
             <Grid item className={classes.icon}>
               <img src={customSoftwareIcon} alt="custom software icon" />

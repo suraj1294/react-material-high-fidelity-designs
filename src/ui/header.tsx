@@ -23,19 +23,19 @@ import List from "@material-ui/core/List";
 import ListItem, { ListItemProps } from "@material-ui/core/ListItem";
 import ListItemText from "@material-ui/core/ListItemText";
 
-const LinkTab: React.ComponentType<
+export const LinkTab: React.ComponentType<
   TabProps & LinkProps
 > = Tab as React.ComponentType<TabProps & LinkProps>;
 
-const LinkButton: React.ComponentType<
+export const LinkButton: React.ComponentType<
   ButtonProps & LinkProps
 > = Button as React.ComponentType<ButtonProps & LinkProps>;
 
-const LinkMenuItem: React.ComponentType<
+export const LinkMenuItem: React.ComponentType<
   LinkProps & MenuItemProps
 > = MenuItem as React.ComponentType<LinkProps & MenuItemProps>;
 
-const LinkListItem: React.ComponentType<
+export const LinkListItem: React.ComponentType<
   LinkProps & ListItemProps
 > = ListItem as React.ComponentType<LinkProps & ListItemProps>;
 

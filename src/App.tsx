@@ -5,6 +5,8 @@ import theme from "./ui/theme";
 import Header from "./ui/header";
 import Footer from "./ui/footer";
 import LandingPage from "./screens/LandingPage";
+import Services from "./screens/Services";
+import CustomSoftware from "./screens/CustomSoftware";
 
 function App() {
   return (
@@ -13,11 +15,11 @@ function App() {
         <Header />
         <Switch>
           <Route exact path="/" component={() => <LandingPage />} />
-          <Route exact path="/services" component={() => <div>Services</div>} />
+          <Route exact path="/services" component={() => <Services />} />
           <Route
             exact
             path="/services/customSoftware"
-            component={() => <div>Custom Services</div>}
+            component={() => <CustomSoftware />}
           />
           <Route
             exact

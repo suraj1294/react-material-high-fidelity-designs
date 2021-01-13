@@ -16,16 +16,18 @@ const arcGrey = "#8f8f8f";
 //     }
 //   }
 
-//   declare module "@material-ui/core/styles/createPalette" {
-//     interface Palette {
-//         arcBlue: React.CSSProperties['color'];
-//         arcOrange: React.CSSProperties['color'];
-//     }
-//     interface PaletteOptions {
-//         arcBlue: React.CSSProperties['color'];
-//         arcOrange: React.CSSProperties['color'];
-//     }
-//   }
+declare module "@material-ui/core/styles/createPalette" {
+  interface Palette {
+    arcBlue: React.CSSProperties["color"];
+    arcOrange: React.CSSProperties["color"];
+    arcGrey: React.CSSProperties["color"];
+  }
+  interface PaletteOptions {
+    arcBlue: React.CSSProperties["color"];
+    arcOrange: React.CSSProperties["color"];
+    arcGrey: React.CSSProperties["color"];
+  }
+}
 
 declare module "@material-ui/core/styles/createTypography" {
   interface Typography {
@@ -44,8 +46,11 @@ declare module "@material-ui/core/styles/createTypography" {
 
 export default createMuiTheme({
   palette: {
-    primary: { main: `${arcBlue}` },
-    secondary: { main: `${arcOrange}` },
+    primary: { main: arcBlue },
+    secondary: { main: arcOrange },
+    arcBlue,
+    arcOrange,
+    arcGrey,
   },
   typography: {
     tab: {
