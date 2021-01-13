@@ -14,6 +14,7 @@ import mobileAppsIcon from "../assets/mobileIcon.svg";
 import websiteIcon from "../assets/websiteIcon.svg";
 import revolutionBackGround from "../assets/repeatingBackground.svg";
 import infoBackground from "../assets/infoBackground.svg";
+import CallToAction from "../ui/CallToAction";
 
 const useStyles = makeStyles((theme) => ({
   animation: {
@@ -422,9 +423,13 @@ const LandingPage = () => {
                 </Button>
               </Grid>
             </Grid>
-
             <div className={classes.infoBackground} />
           </Grid>
+        </Grid>
+
+        <Grid item>
+          {/*-----Call To Action Block-----*/}
+          <CallToAction />
         </Grid>
       </Grid>
     </>
