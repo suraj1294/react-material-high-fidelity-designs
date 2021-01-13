@@ -7,6 +7,7 @@ import Footer from "./ui/footer";
 import LandingPage from "./screens/LandingPage";
 import Services from "./screens/Services";
 import CustomSoftware from "./screens/CustomSoftware";
+import MobileApps from "./screens/MobileApps";
 
 function App() {
   return (
@@ -24,7 +25,7 @@ function App() {
           <Route
             exact
             path="/services/mobileApps"
-            component={() => <div>mobile Apps</div>}
+            component={() => <MobileApps />}
           />
           <Route
             exact

@@ -1,38 +1,53 @@
 import React from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
 import { makeStyles, useTheme } from "@material-ui/core/styles";
+import { Link } from "react-router-dom";
+import Button from "@material-ui/core/Button";
 import ButtonArrow from "./ButtonArrow";
+import useMediaQuery from "@material-ui/core/useMediaQuery";
 
 import background from "../assets/background.jpg";
-import mobileBackGround from "../assets/mobileBackground.jpg";
+import mobileBackground from "../assets/mobileBackground.jpg";
 
 const useStyles = makeStyles((theme) => ({
-  serviceLearnMoreButton: {
+  learnButton: {
     ...theme.typography.heroButton,
+    fontSize: "0.7rem",
     height: 35,
-    fontSize: "0.7em",
     padding: 5,
     [theme.breakpoints.down("sm")]: {
       marginBottom: "2em",
     },
   },
-  estimateButton: {
-    ...theme.typography.estimate,
-    "&:hover": {
-      backgroundColor: theme.palette.secondary.light,
-    },
-  },
-  callToActionBackground: {
+  background: {
     backgroundImage: `url(${background})`,
     backgroundPosition: "center",
     backgroundSize: "cover",
+    backgroundAttachment: "fixed",
     backgroundRepeat: "no-repeat",
     height: "60em",
     width: "100%",
+    [theme.breakpoints.down("md")]: {
+      backgroundImage: `url(${mobileBackground})`,
+      backgroundAttachment: "inherit",
+    },
+  },
+  estimateButton: {
+    ...theme.typography.estimate,
+    borderRadius: 50,
+    height: 80,
+    width: 205,
+    backgroundColor: theme.palette.arcOrange,
+    fontSize: "1.5rem",
+    marginRight: "5em",
+    marginLeft: "2em",
+    "&:hover": {
+      backgroundColor: theme.palette.secondary.light,
+    },
     [theme.breakpoints.down("sm")]: {
-      backgroundImage: `url(${mobileBackGround})`,
+      marginLeft: 0,
+      marginRight: 0,
     },
   },
 }));
@@ -40,33 +55,56 @@ const useStyles = makeStyles((theme) => ({
 const CallToAction = () => {
   const classes = useStyles();
   const theme = useTheme();
+  const matchesSM = useMediaQuery(theme.breakpoints.down("sm"));
+
   return (
     <Grid
       container
-      className={classes.callToActionBackground}
       alignItems="center"
-      justify="space-between"
+      justify={matchesSM ? "center" : "space-between"}
+      className={classes.background}
+      direction={matchesSM ? "column" : "row"}
     >
-      <Grid item style={{ marginLeft: "5em" }}>
-        <Typography variant="h4">
-          Simple Software
-          <br />
-          Revolutionary Results
-        </Typography>
-        <Typography variant="subtitle2">Take advantages of the</Typography>
-        <Button variant="outlined" className={classes.serviceLearnMoreButton}>
-          <span style={{ marginRight: 10 }}>Learn More</span>
-          <ButtonArrow
-            width={10}
-            height={10}
-            fill={theme.palette.primary.main}
-          />
-        </Button>
+      <Grid
+        item
+        style={{
+          marginLeft: matchesSM ? 0 : "5em",
+          textAlign: matchesSM ? "center" : "inherit",
+        }}
+      >
+        <Grid container direction="column">
+          <Grid item>
+            <Typography variant="h2">
+              Simple Software.
+              <br />
+              Revolutionary Results.
+            </Typography>
+            <Typography variant="subtitle2" style={{ fontSize: "1.5rem" }}>
+              Take advantage of the 21st Century.
+            </Typography>
+            <Grid container justify={matchesSM ? "center" : undefined} item>
+              <Button
+                component={Link}
+                to="/revolution"
+                variant="outlined"
+                className={classes.learnButton}
+              >
+                <span style={{ marginRight: 5 }}>Learn More</span>
+                <ButtonArrow
+                  width={10}
+                  height={10}
+                  fill={theme.palette.arcBlue}
+                />
+              </Button>
+            </Grid>
+          </Grid>
+        </Grid>
       </Grid>
       <Grid item>
         <Button
+          component={Link}
+          to="/estimate"
           variant="contained"
-          color="secondary"
           className={classes.estimateButton}
         >
           Free Estimate
@@ -75,5 +113,4 @@ const CallToAction = () => {
     </Grid>
   );
 };
-
 export default CallToAction;
