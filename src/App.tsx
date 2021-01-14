@@ -10,6 +10,7 @@ import CustomSoftware from "./screens/CustomSoftware";
 import MobileApps from "./screens/MobileApps";
 import Websites from "./screens/Websites";
 import Revolution from "./screens/Revolution";
+import About from "./screens/AboutUs";
 
 function App() {
   return (
@@ -35,7 +36,7 @@ function App() {
             component={() => <Websites />}
           />
           <Route exact path="/revolution" component={() => <Revolution />} />
-          <Route exact path="/about" component={() => <div>about</div>} />
+          <Route exact path="/about" component={() => <About />} />
           <Route exact path="/contact" component={() => <div>contact</div>} />
           <Route exact path="/estimate" component={() => <div>estimate</div>} />
         </Switch>
